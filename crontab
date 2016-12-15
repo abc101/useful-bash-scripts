@@ -29,4 +29,4 @@
 
 # use gdrive for google sync
 # see https://github.com/prasmussen/gdrive
-0 5 * * * /usr/local/bin/gdrive sync /srv/backup google-dirver-directory-id >> /var/log/gdrive-sync.log 2>&1
+0 5 * * * /usr/local/bin/gdrive sync /srv/backup google-driver-directory-id >> /var/log/gdrive-sync.log 2>&1
