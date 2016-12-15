@@ -52,7 +52,7 @@ mysql_databases=`echo 'show databases' | mysql --user=${mysql_user} --password=$
 for database in $mysql_databases
 do
   echo "Creating backup of \"${database}\" database"
-  mysqldump --user=${mysql_user} --password=${mysql_password} ${database} | gzip > "${backup_dir}/${database}.gz"
+  mysqldump --user=${mysql_user} --password=${mysql_password} --single-transaction --routines --triggers ${database} | gzip > "${backup_dir}/${database}.gz"
   chmod 600 "${backup_dir}/${database}.gz"
 done
 
