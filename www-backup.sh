@@ -1,5 +1,5 @@
 #!/bin/bash
-# Backup CMS by Songmin Kim
+# Backup www by Songmin Kim
 # Update: Dec 14 2016
 
 # set backup directory path
