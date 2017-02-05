@@ -7,7 +7,7 @@ cat <<-HELP
 
 This is used to update of drupal 8 core. Do not use drupal version UPGRADE.
 
- !!! DO NOT USE THIS BY SUDO or SU. !!!
+ !!! DO NOT USE THIS AS SUDO or SU. !!!
 
 When your drupal system is removed or copied, you are requested sudo priviliges.
 
@@ -33,10 +33,7 @@ while [ "$#" -gt 0 ]; do
     --drupal_current=*)
         drupal_current="${1#*=}"
         ;;
-    --drupal_new=*)
-        drupal_new="${1#*=}"
-        ;;
-    --help) print_help;;
+    --drupal_new=*)c
     *)
       printf "\n"
       printf "**********************************************************\n"
@@ -96,7 +93,7 @@ printf "done.\n"
 printf "Set mainenance mode..."
 drush --root=$drupal_current sset system.mainenance_mode 1
 printf "done.\n"
-printf "Flushing cach..."
+printf "Flushing cash..."
 drush --root=$drupal_current cr
 printf "done.\n"
 
@@ -129,11 +126,11 @@ printf "done.\n"
 printf "Maintenance mode off..."
 drush --root=$drupal_current sset system.maintenance_mode 0
 printf "done.\n"
-printf "Flushing cach..."
+printf "Flushing cash..."
 drush --root=$drupal_current cr
 printf "done.\n"
 
-# Check the new drupal core that will be update
+# Check the new drupal core
 printf "***********************************************************************\n"
 drush --root=$drupal_current status
 printf "***********************************************************************\n"
