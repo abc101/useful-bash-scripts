@@ -1,13 +1,10 @@
 #!/bin/bash
 # Backup MySQL databases by Songmin Kim
-# Update: Dec 14 2016
 
 # set backup directory path
 backup_parent_dir="/srv/backup/mysql"
-
-# create backup directory
-if [ ! -d $backup_parent_dir ]; then
-	mkdir -p $backup_parent_dir
+hen
+	mkdir -p ${backup_parent_dir}
 		if [ "$?" = "0" ]; then
 			:
 		else
@@ -18,7 +15,7 @@ else
 fi
 
 # write date information to a log file
-exec &>> $backup_parent_dir/backup.log
+exec &>> ${backup_parent_dir}/backup.log
 echo "****************************"
 echo "*     Backup date time     *"
 echo "* $(date +%c) *"
@@ -49,18 +46,17 @@ chmod 700 "${backup_dir}"
 mysql_databases=`echo 'show databases' | mysql --user=${mysql_user} --password=${mysql_password} -B | sed /^Database$/d | egrep -vi 'information_schema|performance_schema'`
 
 # backup and compress each database
-for database in $mysql_databases
+for database in ${mysql_databases}
 do
-  echo "Creating backup of \"${database}\" database"
+  printf "Creating backup of \"${database}\" database ..."
   mysqldump --user=${mysql_user} --password=${mysql_password} --single-transaction --routines --triggers ${database} | gzip > "${backup_dir}/${database}.gz"
   chmod 600 "${backup_dir}/${database}.gz"
+	printf "done.\n"
 done
 
 # remove backups older than 7 days
-find $backup_parent_dir -maxdepth 1 -type d -mtime +7 -exec echo {} "will be removed." \;
-find $backup_parent_dir -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
-echo
-echo "Removed if there is older than 7days folders"
+find ${backup_parent_dir} -maxdepth 1 -type d -mtime +7 -exec printf {} "will be removed.\n" \;
+find ${backup_parent_dir} -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
 echo
 echo "********* End Work **********"
 echo
