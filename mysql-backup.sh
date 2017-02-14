@@ -6,6 +6,8 @@ backup_parent_dir="/srv/backup/mysql"
 
 # Create backup directory
 if [ ! -d ${backup_parent_dir} ]; then
+=======
+then
 	mkdir -p ${backup_parent_dir}
 		if [ "$?" = "0" ]; then
 			:
