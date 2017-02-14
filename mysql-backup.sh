@@ -1,9 +1,11 @@
 #!/bin/bash
 # Backup MySQL databases by Songmin Kim
 
-# set backup directory path
+# Backup directory path
 backup_parent_dir="/srv/backup/mysql"
-hen
+
+# Create backup directory
+if [ ! -d ${backup_parent_dir} ]; then
 	mkdir -p ${backup_parent_dir}
 		if [ "$?" = "0" ]; then
 			:
