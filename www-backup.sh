@@ -4,6 +4,9 @@
 # set backup directory path
 backup_parent_dir="/srv/backup/www"
 
+# set target directory
+target_dir="/var/www"
+
 # create backup directories
 if [ ! -d ${backup_parent_dir} ]; then
 	mkdir -p ${backup_parent_dir}
@@ -32,11 +35,11 @@ mkdir -p "${backup_dir}"
 chmod 700 "${backup_dir}"
 
 # each directory compress on $HOME/public_html
-dirlist=`find /srv/www -maxdepth 1 -mindepth 1 -exec basename {} \;`
+dirlist=`find ${target_dir} -maxdepth 1 -mindepth 1 -exec basename {} \;`
 for dir in ${dirlist}
 do
-	printf "Start compressing /srv/www/$dir ... "
-	tar czf ${backup_dir}/${dir}.tar.gz -C /srv/www/ ${dir}
+	printf "Start compressing ${target_dir}/${dir} ... "
+	tar czf ${backup_dir}/${dir}.tar.gz -C ${target_dir} ${dir}
 	printf "done.\n"
 done
 
