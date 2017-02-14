@@ -3,7 +3,7 @@
 
 # set backup directory path
 backup_parent_dir="/srv/backup/mysql"
-hen
+then
 	mkdir -p ${backup_parent_dir}
 		if [ "$?" = "0" ]; then
 			:
